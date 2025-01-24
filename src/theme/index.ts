@@ -1,9 +1,7 @@
 import { createTheme } from "@mui/material";
 import { react_chrono_ts_theme } from "@react-chrono-ts/ui";
 
-const mode: "light" | "dark" = "light";
-
-console.log(react_chrono_ts_theme(mode));
+const mode: "light" | "dark" = "dark";
 
 const theme = createTheme(react_chrono_ts_theme(mode));
 

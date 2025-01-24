@@ -1,10 +1,11 @@
 import Layout from "@Components/Layout";
+import { Title } from "@react-chrono-ts/ui";
 
 const Landing = () => {
   return (
     <Layout>
       <div>
-        <span>Landing Page</span>
+        <Title text="Landing" />
       </div>
     </Layout>
   );

@@ -9,6 +9,7 @@ export default defineConfig({
       "@Pages": "/src/pages",
       "@Components": "/src/components",
       "@Stores": "/src/stores",
+      "@Hooks": "/src/hooks",
     },
   },
 });

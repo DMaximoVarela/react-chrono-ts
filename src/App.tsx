@@ -3,7 +3,7 @@ import Router from "./routes";
 import { createTheme } from "@mui/material";
 import { react_chrono_ts_theme } from "@react-chrono-ts/ui";
 import useSettingsStore from "@Stores/settingsStore";
-import usePrefersDarkMode from "./hooks/usePrefersDarkMode";
+import usePrefersDarkMode from "@Hooks/usePrefersDarkMode";
 
 function App() {
   const mode = useSettingsStore((state) => state.mode);

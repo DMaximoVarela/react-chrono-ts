@@ -14,7 +14,7 @@ const useSettingsStore = create<State>((set) => ({
   setOpen: (open) => {
     set({ open: open });
   },
-  mode: "light" as Mode,
+  mode: "system" as Mode,
   setMode: (mode) => {
     set({ mode: mode });
   },

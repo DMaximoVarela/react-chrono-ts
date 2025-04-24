@@ -1,4 +1,6 @@
 import { create } from "zustand";
+import moment from "moment-timezone";
+import { timeZoneFormattedUtils } from "@Utils/timezoneUtils";
 
 type Mode = "dark" | "light" | "system";
 
@@ -7,6 +9,8 @@ interface State {
   setOpen: (open: boolean) => void;
   mode: Mode;
   setMode: (mode: Mode) => void;
+  timezone: string;
+  setTimezone: (tz: string) => void;
 }
 
 const useSettingsStore = create<State>((set) => ({
@@ -17,6 +21,10 @@ const useSettingsStore = create<State>((set) => ({
   mode: "system" as Mode,
   setMode: (mode) => {
     set({ mode: mode });
+  },
+  timezone: timeZoneFormattedUtils(moment.tz.guess()),
+  setTimezone: (tz) => {
+    set({ timezone: tz });
   },
 }));
 

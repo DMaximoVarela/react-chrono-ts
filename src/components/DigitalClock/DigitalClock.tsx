@@ -1,16 +1,25 @@
 import { useState, useEffect } from "react";
 import { DateTime } from "luxon";
 import { Box, Typography, useMediaQuery } from "@mui/material";
+import { Edit } from "@mui/icons-material";
+import useSettingsStore from "@Stores/settingsStore";
+import { removeFormattedTimezone } from "@Utils/timezoneUtils";
 
 const DigitalClock = () => {
-  const [time, setTime] = useState(DateTime.now());
+  const timezone = useSettingsStore((state) => state.timezone);
+  const setOpenSettings = useSettingsStore((state) => state.setOpen);
+  const dateNow = DateTime.now();
+  const [time, setTime] = useState(
+    dateNow.setZone(removeFormattedTimezone(timezone))
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTime(DateTime.now());
+      const today = DateTime.now();
+      setTime(today.setZone(removeFormattedTimezone(timezone)));
     }, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [timezone]);
 
   const date = time.setLocale("es").toFormat("EEEE, d 'de' LLLL 'de' yyyy");
 
@@ -30,6 +39,21 @@ const DigitalClock = () => {
           borderRadius: ".5rem",
         }}
       >
+        <Typography
+          variant="body1"
+          component="span"
+          fontSize={isSmall ? "1em" : "1.5em"}
+          sx={{
+            cursor: "pointer",
+            "&:hover": {
+              color: "primary.main",
+            },
+            transition: "all 200ms ease-out",
+          }}
+          onClick={() => setOpenSettings(true)}
+        >
+          {timezone.replace("_", " ").replace("/", ", ")} <Edit />
+        </Typography>
         <Typography variant="h1" component="h1" fontSize="3.5em">
           {time.toFormat("HH:mm:ss")}
         </Typography>

@@ -8,15 +8,13 @@ import { removeFormattedTimezone } from "@Utils/timezoneUtils";
 const DigitalClock = () => {
   const timezone = useSettingsStore((state) => state.timezone);
   const setOpenSettings = useSettingsStore((state) => state.setOpen);
-  const dateNow = DateTime.now();
   const [time, setTime] = useState(
-    dateNow.setZone(removeFormattedTimezone(timezone))
+    DateTime.now().setZone(removeFormattedTimezone(timezone))
   );
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const today = DateTime.now();
-      setTime(today.setZone(removeFormattedTimezone(timezone)));
+      setTime(DateTime.now().setZone(removeFormattedTimezone(timezone)));
     }, 1000);
     return () => clearInterval(interval);
   }, [timezone]);
